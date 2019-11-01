@@ -10,6 +10,7 @@
     "test:unit": "jest --config jest.config.json"
   },
   "devDependencies": {
+    "@types/config": "^0.0.35",
     "@types/jest": "^24.0.21",
     "@types/node": "^12.12.3",
     "@types/pino": "^5.8.13",
@@ -22,6 +23,7 @@
     "typescript": "^3.6.4"
   },
   "dependencies": {
+    "config": "^3.2.4",
     "dotenv": "^8.2.0",
     "pino": "^5.13.5"
   }
