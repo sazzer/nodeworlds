@@ -6,9 +6,12 @@ import rtracer from 'cls-rtracer';
 import compression from 'compression';
 import express, { Express } from 'express';
 import helmet from 'helmet';
+import i18nextMiddleware from 'i18next-express-middleware';
 import morgan from 'morgan';
 import nunjucks from 'nunjucks';
 import responseTime from 'response-time';
+
+import i18n from '../i18n';
 
 const logger = pino({ name: 'server' });
 
@@ -30,6 +33,7 @@ class Server {
         this.app.use(responseTime());
         this.app.use(helmet());
         this.app.use(morgan('combined'));
+        this.app.use(i18nextMiddleware.handle(i18n));
 
         nunjucks.configure('views', {
             autoescape: true,
