@@ -1,4 +1,6 @@
 import 'dotenv/config';
+import pino from 'pino';
 
-// tslint:disable
-console.log(process.env.TEST);
+const logger = pino({ name: 'nodeworlds' });
+
+logger.info('Testing: %s', process.env.TEST);
