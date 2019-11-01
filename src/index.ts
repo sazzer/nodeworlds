@@ -1,10 +1,6 @@
 import 'dotenv/config';
 
-import config from 'config';
-import pino from 'pino';
+import { buildServer } from './server';
 
-const logger = pino({ name: 'nodeworlds' });
-
-const httpPort = config.get('http.port');
-
-logger.info('Testing: %s', httpPort);
+const server = buildServer();
+server.start();
