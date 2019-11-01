@@ -46,6 +46,8 @@ class Server {
         });
         this.app.set('view engine', 'nunjucks');
 
+        this.app.use('/static', express.static('static'));
+
         this.app.get('/', (req, res) => {
             res.render('index');
         });
