@@ -2,5 +2,15 @@
   "name": "nodeworlds",
   "version": "1.0.0",
   "author": "Graham Cox <graham@grahamcox.co.uk>",
-  "private": true
+  "private": true,
+  "scripts": {
+    "start": "ts-node src/index",
+    "test:lint": "tslint --project ."
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.3",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4"
+  }
 }
