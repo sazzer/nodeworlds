@@ -7,6 +7,7 @@ import compression from 'compression';
 import express, { Express } from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import nunjucks from 'nunjucks';
 import responseTime from 'response-time';
 
 const logger = pino({ name: 'server' });
@@ -29,6 +30,22 @@ class Server {
         this.app.use(responseTime());
         this.app.use(helmet());
         this.app.use(morgan('combined'));
+
+        nunjucks.configure('views', {
+            autoescape: true,
+            throwOnUndefined: true,
+            trimBlocks: true,
+            lstripBlocks: true,
+            watch: true,
+            noCache: true,
+            express: this.app,
+        });
+        this.app.set('view engine', 'nunjucks');
+
+        this.app.get('/', (req, res) => {
+            res.render('index');
+        });
+
     }
 
     /**
