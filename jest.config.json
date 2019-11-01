@@ -1,0 +1,7 @@
+{
+  "verbose": true,
+  "roots": ["./src"],
+  "transform": {
+    "^.+\\.ts$": "ts-jest"
+  }
+}
