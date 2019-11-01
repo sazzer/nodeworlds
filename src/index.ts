@@ -1,2 +1,4 @@
+import 'dotenv/config';
+
 // tslint:disable
-console.log('Hello');
+console.log(process.env.TEST);
