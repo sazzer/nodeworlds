@@ -1,5 +1,9 @@
 {
   "page": {
-    "title": "Worlds"
+    "title": "Worlds",
+    "header": {
+      "toggle": "Toggle Navigation",
+      "login": "Login / Register"
+    }
   }
 }
