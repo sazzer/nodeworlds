@@ -11,7 +11,11 @@ export class HomeModule implements RegisterRoutes {
      */
     public registerRoutes(router: Router) {
         router.get('/', (req, res) => {
-            res.render('index');
+            res.render('homepage');
+        });
+
+        router.get('/landing', (req, res) => {
+            res.redirect('/static/fantasy-world.jpg');
         });
     }
 }

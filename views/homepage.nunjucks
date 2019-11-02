@@ -1,0 +1,29 @@
+{% extends "landing.nunjucks" %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">{{ t("homepage.worlds.title") }}</h3>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Discworld</h5>
+                        <small class="text-muted">3 days ago</small>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Tamriel</h5>
+                        <small class="text-muted">2 weeks ago</small>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Game Of Thrones</h5>
+                        <small class="text-muted">3 weeks ago</small>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -6,6 +6,11 @@
       "login": "Login / Register"
     }
   },
+  "homepage": {
+    "worlds": {
+      "title": "Favourite Worlds"
+    }
+  },
   "login": {
     "title": "Login / Register",
     "email": {

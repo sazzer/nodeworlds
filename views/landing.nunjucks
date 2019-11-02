@@ -1,0 +1,12 @@
+{% extends "layout/page.nunjucks" %}
+
+{% block body %}
+  <div class="row">
+    <div class="col-12 col-md-4 order-sm-1">
+        {% block content %}{% endblock %}
+    </div>
+    <div class="col-12 col-md-8">
+        <img src="/landing" class="img-fluid shadow-lg" />
+    </div>
+  </div>
+{% endblock %}
