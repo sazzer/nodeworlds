@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
-import { buildServer } from './server';
+import { build } from './main';
 
-const server = buildServer();
+const server = build();
 server.start();

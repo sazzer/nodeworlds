@@ -3,7 +3,7 @@ import i18next from 'i18next';
 import defaultTranslations from './messages.json';
 
 i18next.init({
-    debug: true,
+    debug: false,
 
     resources: {
         dev: {
