@@ -20,7 +20,7 @@
   <body>
     {% include "layout/header.nunjucks" %}
 
-    <div class="container">
+    <div class="container-fluid mt-3">
     {% block body %}{% endblock %}
     </div>
     <script src="/static/jquery/jquery-3.3.1.slim.min.js"></script>

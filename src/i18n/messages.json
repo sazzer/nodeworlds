@@ -5,5 +5,16 @@
       "toggle": "Toggle Navigation",
       "login": "Login / Register"
     }
+  },
+  "login": {
+    "title": "Login / Register",
+    "email": {
+      "label": "Email Address",
+      "placeholder": "Email Address",
+      "help": "We'll never share your email with anyone else."
+    },
+    "buttons": {
+      "save": "Login / Register"
+    }
   }
 }
