@@ -12,14 +12,33 @@
     }
   },
   "login": {
-    "title": "Login / Register",
+    "title": {
+      "start": "Login / Register",
+      "login": "Login",
+      "register": "Register"
+    },
     "email": {
       "label": "Email Address",
       "placeholder": "Email Address",
       "help": "We'll never share your email with anyone else."
     },
+    "name": {
+      "label": "Name",
+      "placeholder": "Enter Your Name",
+      "help": "Whatever name you wish to be known by."
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter Password"
+    },
+    "password2": {
+      "label": "Repeat Password",
+      "placeholder": "Enter Password Again"
+    },
     "buttons": {
-      "save": "Login / Register"
+      "start": "Login / Register",
+      "login": "Login",
+      "register": "Register"
     }
   }
 }

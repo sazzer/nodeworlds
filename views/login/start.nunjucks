@@ -3,19 +3,21 @@
 {% block content %}
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title">{{ t("login.title") }}</h3>
+            <h3 class="card-title">{{ t("login.title.start") }}</h3>
             <form action="/login" method="post">
               <div class="form-group">
                 <label for="email">{{ t("login.email.label") }}</label>
                 <input type="email"
                        class="form-control"
                        id="email"
+                       name="email"
                        aria-describedby="emailHelp"
                        placeholder="{{ t("login.email.placeholder") }}"
+                       required
                        autofocus />
                 <small id="emailHelp" class="form-text text-muted">{{ t("login.email.help") }}</small>
               </div>
-              <button type="submit" class="btn btn-primary">{{ t("login.buttons.save") }}</button>
+              <button type="submit" class="btn btn-primary btn-block">{{ t("login.buttons.start") }}</button>
             </form>
         </div>
     </div>
