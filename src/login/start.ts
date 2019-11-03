@@ -8,7 +8,7 @@ import { Request, Response } from 'express';
 export function startLogin(req: Request, res: Response) {
     const email = req.body.email;
 
-    res.render('login/register', {
+    res.render('login/login', {
         email,
     });
 }

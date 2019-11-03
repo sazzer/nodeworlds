@@ -1,29 +1,31 @@
 {% extends "landing.nunjucks" %}
 
 {% block content %}
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title">{{ t("homepage.worlds.title") }}</h3>
-            <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Discworld</h5>
-                        <small class="text-muted">3 days ago</small>
-                    </div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Tamriel</h5>
-                        <small class="text-muted">2 weeks ago</small>
-                    </div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Game Of Thrones</h5>
-                        <small class="text-muted">3 weeks ago</small>
-                    </div>
-                </a>
+<div class="ui card">
+    <div class="content">
+        <div class="header">{{ t("homepage.worlds.title") }}</div>
+    </div>
+    <div class="content">
+        <div class="ui relaxed list">
+          <div class="item">
+            <div class="content">
+              <a class="header">Discworld</a>
+              <div class="description">Updated 10 mins ago</div>
             </div>
+          </div>
+          <div class="item">
+            <div class="content">
+              <a class="header">Tamriel</a>
+              <div class="description">Updated 22 mins ago</div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="content">
+              <a class="header">Game Of Thrones</a>
+              <div class="description">Updated 34 mins ago</div>
+            </div>
+          </div>
         </div>
     </div>
+</div>
 {% endblock %}

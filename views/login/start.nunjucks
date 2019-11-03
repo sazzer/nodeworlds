@@ -1,24 +1,41 @@
 {% extends "landing.nunjucks" %}
 
 {% block content %}
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title">{{ t("login.title.start") }}</h3>
-            <form action="/login" method="post">
-              <div class="form-group">
+<div class="ui card">
+    <div class="content">
+        <div class="header">{{ t("login.title.start") }}</div>
+    </div>
+    <div class="content">
+        <form action="/login" method="post" class="ui form">
+            <div class="required field">
                 <label for="email">{{ t("login.email.label") }}</label>
                 <input type="email"
-                       class="form-control"
                        id="email"
                        name="email"
-                       aria-describedby="emailHelp"
                        placeholder="{{ t("login.email.placeholder") }}"
                        required
                        autofocus />
-                <small id="emailHelp" class="form-text text-muted">{{ t("login.email.help") }}</small>
-              </div>
-              <button type="submit" class="btn btn-primary btn-block">{{ t("login.buttons.start") }}</button>
-            </form>
-        </div>
+            </div>
+            <button class="ui fluid primary button" type="submit">{{ t("login.buttons.start") }}</button>
+              <h4 class="ui horizontal divider">
+                Or
+              </h4>
+            <div class="field">
+                <button class="ui facebook fluid button">
+                  <i class="facebook icon"></i>Log In with Facebook
+                </button>
+            </div>
+            <div class="field">
+                <button class="ui google plus fluid button">
+                  <i class="google plus icon"></i>Log In with Google
+                </button>
+            </div>
+            <div class="field">
+                <button class="ui twitter fluid button">
+                  <i class="twitter icon"></i>Log In with Twitter
+                </button>
+            </div>
+        </form>
     </div>
+</div>
 {% endblock %}
