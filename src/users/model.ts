@@ -1,5 +1,8 @@
 import { Password } from './password';
 
+/** The type representingthe ID of a usr */
+export type UserId = string;
+
 /**
  * Theshape of the data representing a user
  *
