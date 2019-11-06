@@ -10,7 +10,7 @@ export async function build(): Promise<Server> {
     const databaseModule = new DatabaseModule();
     await databaseModule.migrate();
 
-    const usersModule = new UsersModule();
+    const usersModule = new UsersModule(databaseModule);
 
     const server = buildServer([
         new HomeModule(),

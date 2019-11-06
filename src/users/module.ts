@@ -1,3 +1,4 @@
+import { DatabaseModule } from '../database/module';
 import { UserRetriever, UserService } from './api';
 import { UserDao } from './dao';
 
@@ -18,8 +19,8 @@ export class UsersModule {
      * Construct the user module
      * @memberof UserModule
      */
-    public constructor() {
-        const dao = new UserDao();
+    public constructor(database: DatabaseModule) {
+        const dao = new UserDao(database.pool);
         this.retriever = dao;
         this.service = dao;
     }
