@@ -32,6 +32,7 @@
     "typescript": "^3.6.4"
   },
   "dependencies": {
+    "@types/uuid": "^3.4.6",
     "argon2": "^0.25.1",
     "body-parser": "^1.19.0",
     "chokidar": "^3.2.3",
@@ -50,6 +51,7 @@
     "pg": "^7.12.1",
     "postgres-migrations": "^3.0.2",
     "response-time": "^2.3.2",
-    "supports-color": "^7.1.0"
+    "supports-color": "^7.1.0",
+    "uuid": "^3.3.3"
   }
 }
