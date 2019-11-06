@@ -1,5 +1,5 @@
 import config from 'config';
-import pino from 'pino';
+import debug from 'debug';
 
 import bodyParser from 'body-parser';
 import rtracer from 'cls-rtracer';
@@ -14,7 +14,9 @@ import responseTime from 'response-time';
 import i18n from '../i18n';
 import { RegisterRoutes } from './register';
 
-const logger = pino({ name: 'server' });
+/** The logger to use */
+const logger = debug('nodeworlds:server');
+
 /**
  * Representation of the actual server
  */
@@ -60,7 +62,7 @@ class ServerImpl implements Server {
      */
     public start() {
         const httpPort = config.get('http.port');
-        logger.info('Starting server on port %d...', httpPort);
+        logger('Starting server on port %d...', httpPort);
         this.app.listen(httpPort);
     }
 }
@@ -70,11 +72,11 @@ class ServerImpl implements Server {
  * @return the server
  */
 export function buildServer(routes: RegisterRoutes[]): Server {
-    logger.debug('Building server...');
+    logger('Building server...');
     const server = new ServerImpl();
 
     routes.forEach(route => {
-        logger.info('Registering routes from: %o', route);
+        logger('Registering routes from: %o', route);
         route.registerRoutes(server.app);
     });
 

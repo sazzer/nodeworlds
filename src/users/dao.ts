@@ -1,6 +1,10 @@
+import debug from 'debug';
 import { Model } from '../api';
 import { UserService } from './api';
 import { UserData, UserId } from './model';
+
+/** The logger to use */
+const logger = debug('nodeworlds:users:dao');
 
 /**
  * DAO for accessing users
@@ -14,6 +18,8 @@ export class UserDao implements UserService {
      * @memberof UserDao
      */
     public async findUserByEmail(email: string): Promise<Model<UserId, UserData> | undefined> {
+        logger('Finding user with email address: %s', email);
+
         return Promise.resolve({
             identity: {
                 id: '',

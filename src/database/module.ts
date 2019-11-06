@@ -1,9 +1,10 @@
 import config from 'config';
+import debug from 'debug';
 import { Pool } from 'pg';
-import pino from 'pino';
 import { migrate } from 'postgres-migrations';
 
-const logger = pino({ name: 'database' });
+/** The logger to use */
+const logger = debug('nodeworlds:database');
 
 /**
  * Module representing the database connection
@@ -18,7 +19,7 @@ export class DatabaseModule {
      */
     constructor() {
         const connectionString: string = config.get('database.url');
-        logger.info('Collecting to database: %s', connectionString);
+        logger('Collecting to database: %s', connectionString);
 
         this.pool = new Pool({
             connectionString,
@@ -42,7 +43,7 @@ export class DatabaseModule {
         },
             'migrations',
             {
-                logger: msg => logger.info(msg),
+                logger: msg => logger(msg),
             });
 
     }
