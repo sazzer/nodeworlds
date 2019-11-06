@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { RegisterRoutes } from '../server';
 import { UsersModule } from '../users';
+import { loginHandler } from './handler';
 import { initialLoginForm } from './initial';
-import { startLogin } from './start';
 
 /**
  * Module representing the login screen
@@ -25,6 +25,6 @@ export class LoginModule implements RegisterRoutes {
      */
     public registerRoutes(router: Router) {
         router.get('/login', initialLoginForm);
-        router.post('/login', (req, res) => startLogin(req, res, this.usersModule.retriever));
+        router.post('/login', (req, res) => loginHandler(req, res, this.usersModule.service));
     }
 }
