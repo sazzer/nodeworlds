@@ -6,8 +6,9 @@ import { UsersModule } from './users';
 /**
  * Build the entire application ready to run
  */
-export function build(): Server {
+export async function build(): Promise<Server> {
     const databaseModule = new DatabaseModule();
+    await databaseModule.migrate();
 
     const usersModule = new UsersModule();
 
