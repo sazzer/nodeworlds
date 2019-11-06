@@ -1,7 +1,7 @@
 import config from 'config';
 import debug from 'debug';
 import { Pool } from 'pg';
-import { migrate } from 'postgres-migrations';
+import { migrateDb } from './migrate';
 
 /** The logger to use */
 const logger = debug('nodeworlds:database');
@@ -34,17 +34,7 @@ export class DatabaseModule {
      * @memberof DatabaseModule
      */
     public async migrate() {
-        await migrate({
-            database: 'nodeworlds',
-            user: 'nodeworlds',
-            password: 'nodeworlds',
-            host: 'localhost',
-            port: 45432,
-        },
-            'migrations',
-            {
-                logger: msg => logger(msg),
-            });
-
+        const connectionString: string = config.get('database.url');
+        await migrateDb(connectionString);
     }
 }
