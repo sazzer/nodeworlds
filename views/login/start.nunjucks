@@ -15,6 +15,7 @@
                        placeholder="{{ t("login.email.placeholder") }}"
                        required
                        autofocus />
+                <span class="ui small text">{{ t("login.email.help") }}</span>
             </div>
             <button class="ui fluid primary button" type="submit">{{ t("login.buttons.start") }}</button>
               <h4 class="ui horizontal divider">

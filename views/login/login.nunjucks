@@ -17,6 +17,7 @@
                        value="{{ email }}"
                        readonly
                        required  />
+                <span class="ui small text">{{ t("login.email.help") }}</span>
             </div>
             <div class="required field">
                 <label for="password">{{ t("login.password.label") }}</label>

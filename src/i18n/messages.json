@@ -25,15 +25,25 @@
     "name": {
       "label": "Name",
       "placeholder": "Enter Your Name",
-      "help": "Whatever name you wish to be known by."
+      "help": "Whatever name you wish to be known by.",
+      "problems": {
+        "missing": "Name is required"
+      }
     },
     "password": {
       "label": "Password",
-      "placeholder": "Enter Password"
+      "placeholder": "Enter Password",
+      "problems": {
+        "missing": "Password is required"
+      }
     },
     "password2": {
       "label": "Repeat Password",
-      "placeholder": "Enter Password Again"
+      "placeholder": "Enter Password Again",
+      "problems": {
+        "missing": "Repeat Password is required",
+        "mismatch": "Passwords don't match"
+      }
     },
     "buttons": {
       "start": "Login / Register",

@@ -6,7 +6,7 @@
         <div class="header">{{ t("login.title.register") }}</div>
     </div>
     <div class="content">
-        <form action="/login" method="post" class="ui form">
+        <form action="/login" method="post" class="ui form {{ "error" if problems }}">
             <input type="hidden" name="action" value="register" />
             <div class="required field">
                 <label for="email">{{ t("login.email.label") }}</label>
@@ -17,17 +17,20 @@
                        value="{{ email }}"
                        readonly
                        required  />
+                <span class="ui small text">{{ t("login.email.help") }}</span>
             </div>
-            <div class="required field">
+            <div class="required field {{ "error" if problems.name }}">
                 <label for="name">{{ t("login.name.label") }}</label>
                 <input type="text"
                        id="name"
                        name="name"
                        placeholder="{{ t("login.name.placeholder") }}"
+                       value="{{ name if name }}"
                        autofocus
                        required  />
+                <span class="ui small text">{{ t("login.name.help") }}</span>
             </div>
-            <div class="required field">
+            <div class="required field {{ "error" if problems.password }}">
                 <label for="password">{{ t("login.password.label") }}</label>
                 <input type="password"
                        id="password"
@@ -35,7 +38,7 @@
                        placeholder="{{ t("login.password.placeholder") }}"
                        required  />
             </div>
-            <div class="required field">
+            <div class="required field {{ "error" if problems.password2 }}">
                 <label for="password2">{{ t("login.password2.label") }}</label>
                 <input type="password"
                        id="password2"
@@ -44,6 +47,13 @@
                        required  />
             </div>
             <button class="ui fluid primary button" type="submit">{{ t("login.buttons.register") }}</button>
+            <div class="ui error message">
+                {% for field, fieldProblems in problems %}
+                    {% for problem in fieldProblems %}
+                        <p>{{ t('login.' + field + '.problems.' + problem) }}</p>
+                    {% endfor %}
+                {% endfor %}
+            </div>
         </form>
     </div>
 </div>

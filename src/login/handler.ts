@@ -1,6 +1,7 @@
 import debug from 'debug';
 import { Request, Response } from 'express';
 import { UserService } from '../users';
+import { register } from './register';
 import { startLogin } from './start';
 
 /** The logger to use */
@@ -19,7 +20,7 @@ export async function loginHandler(req: Request, res: Response, userService: Use
             break;
         case 'register':
             logger('Processing User Registration');
-            startLogin(req, res, userService);
+            register(req, res, userService);
             break;
         default:
             logger('Starting Login process');
