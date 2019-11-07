@@ -3,5 +3,6 @@
   "roots": ["./src"],
   "transform": {
     "^.+\\.ts$": "ts-jest"
-  }
+  },
+  "collectCoverageFrom": ["**/*.ts"]
 }
