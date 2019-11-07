@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { DatabaseModule } from './database';
 import { HomeModule } from './home';
 import { LoginModule } from './login';

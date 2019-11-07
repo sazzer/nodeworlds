@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { DatabaseModule } from '../database/module';
 import { UserRetriever, UserService } from './api';
 import { UserDao } from './dao';

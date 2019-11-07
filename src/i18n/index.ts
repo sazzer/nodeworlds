@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import i18next from 'i18next';
 
 import defaultTranslations from './messages.json';
