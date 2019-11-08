@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  nodeworlds-postgres:
+    image: postgres:11.5-alpine
+    environment:
+      POSTGRES_DB: nodeworlds
+      POSTGRES_USER: nodeworlds
+      POSTGRES_PASSWORD: nodeworlds
+    networks:
+      - nodeworlds-full
+
+  nodeworlds-phppgadmin:
+    image: dockage/phppgadmin:latest
+    environment:
+      - PHP_PG_ADMIN_SERVER_DESC=NuWorlds
+      - PHP_PG_ADMIN_SERVER_HOST=nodeworlds-postgres
+      - PHP_PG_ADMIN_SERVER_PORT=5432
+      - PHP_PG_ADMIN_SERVER_SSL_MODE=disable
+      - PHP_PG_ADMIN_SERVER_DEFAULT_DB=nodeworlds
+      - PHP_PG_ADMIN_SHOW_ADVANCED=true
+      - PHP_PG_ADMIN_SHOW_COMMENTS=true
+      - PHP_PG_ADMIN_OWNED_ONLY=true
+      - PHP_PG_ADMIN_SHOW_SYSTEM=true
+      - PHP_PG_ADMIN_SHOW_OIDS=true
+    ports:
+      - "127.0.0.1:38081:80"
+    depends_on:
+      - nodeworlds-postgres
+    networks:
+      - nodeworlds-full
+
+  nodeworlds:
+    image: nodeworlds:latest
+    environment:
+      - DEBUG=nodeworlds:*
+      - POSTGRES_URL=postgresql://nodeworlds:nodeworlds@nodeworlds-postgres:5432/nodeworlds
+      - PORT=3000
+      - DOCKERIZE=-wait tcp://nodeworlds-postgres:5432
+    ports:
+      - "127.0.0.1:33000:3000"
+    networks:
+      - nodeworlds-full
+
+networks:
+  nodeworlds-full:

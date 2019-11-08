@@ -7,7 +7,8 @@
     "start": "ts-node src/index",
     "test": "run-s test:lint test:unit",
     "test:lint": "tslint --project .",
-    "test:unit": "jest --config jest.config.json"
+    "test:unit": "jest --config jest.config.json",
+    "docker": "docker build -t nodeworlds ."
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
