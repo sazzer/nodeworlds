@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  nodeworlds-e2e-postgres:
+    image: postgres:11.5-alpine
+    environment:
+      POSTGRES_DB: nodeworlds
+      POSTGRES_USER: nodeworlds
+      POSTGRES_PASSWORD: nodeworlds
+    networks:
+      - nodeworlds-e2e
+
+  nodeworlds-e2e-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DEBUG=nodeworlds:*
+      - POSTGRES_URL=postgresql://nodeworlds:nodeworlds@nodeworlds-e2e-postgres:5432/nodeworlds
+      - PORT=3000
+      - DOCKERIZE=-wait tcp://nodeworlds-e2e-postgres:5432
+    networks:
+      - nodeworlds-e2e
+
+  nodeworlds-e2e-chrome:
+    image: selenium/standalone-chrome:3.141.59-xenon
+    networks:
+      - nodeworlds-e2e
+
+  nodeworlds-e2e-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile-e2e
+    entrypoint: dockerize -wait tcp://nodeworlds-e2e-service:3000 -wait tcp://nodeworlds-e2e-chrome:4444 yarn e2e
+    networks:
+      - nodeworlds-e2e
+
+networks:
+  nodeworlds-e2e:
