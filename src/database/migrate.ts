@@ -14,16 +14,14 @@ const logger = debug('nodeworlds:database:migrate');
 export async function migrateDb(connectionString: string) {
     const parsed = new URL(connectionString);
 
-    await migrate({
+    const migrateConfig = {
         user: parsed.username,
         password: parsed.password,
-        host: parsed.hash || '',
+        host: parsed.hostname || '',
         port: parseInt(parsed.port, 10),
         database: parsed.pathname.substr(1),
-    },
-        'migrations',
-        {
-            logger: msg => logger(msg),
-        });
+    };
+    logger('Migrating database: %o', migrateConfig);
 
+    await migrate(migrateConfig, 'migrations', { logger: msg => logger(msg) });
 }
