@@ -27,7 +27,7 @@ export class BasePage extends Page {
      * @memberof BasePage
      */
     public get header() {
-        return this.findElement(By.css('.ui.inverted.stackable.menu'))
+        return this.findElement(By.css('[data-test="header"]'))
             .then(element => new Header(element));
     }
 }

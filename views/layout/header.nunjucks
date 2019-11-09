@@ -1,4 +1,4 @@
-<div class="ui inverted stackable menu">
+<div class="ui inverted stackable menu" data-test="header">
   <a class="header item" href="/">{{ t("page.title") }}</a>
-  <a class="right item" href="/login">{{ t("page.header.login") }}</a>
+  <a class="right item" href="/login" data-test="login">{{ t("page.header.login") }}</a>
 </div>

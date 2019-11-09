@@ -23,7 +23,7 @@ export class Header extends PageObject {
      * @memberof Header
      */
     public async login() {
-        const loginLink = await this.findElement(By.css('a.right.item'));
+        const loginLink = await this.findElement(By.css('[data-test="login"]'));
         await loginLink.click();
     }
 
