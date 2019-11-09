@@ -4,5 +4,6 @@
   "transform": {
     "^.+\\.ts$": "ts-jest"
   },
-  "collectCoverageFrom": ["**/*.ts"]
+  "collectCoverageFrom": ["**/*.ts"],
+  "coverageDirectory": "output/coverage"
 }

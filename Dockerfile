@@ -18,7 +18,7 @@ WORKDIR /nodeworlds/run
 COPY package.json yarn.lock /nodeworlds/run/
 RUN yarn install --prod
 
-COPY --from=build /nodeworlds/build/dest /nodeworlds/run/dest
+COPY --from=build /nodeworlds/build/output/dest /nodeworlds/run/dest
 COPY ./config /nodeworlds/run/config
 COPY ./migrations /nodeworlds/run/migrations
 COPY ./static /nodeworlds/run/static

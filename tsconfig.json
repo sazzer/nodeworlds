@@ -6,7 +6,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "sourceMap": true,
-    "outDir": "dest"
+    "outDir": "output/dest"
   },
   "include": ["src/**/*.ts"]
 }
