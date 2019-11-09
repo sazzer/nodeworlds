@@ -1,14 +1,14 @@
 import { WebDriver } from 'selenium-webdriver';
-import { Page } from '../selenium';
+import { BasePage } from '../base';
 
 /**
  * Page Model for the home page
  *
  * @export
  * @class HomePage
- * @extends {Page}
+ * @extends {BasePage}
  */
-export class HomePage extends Page {
+export class HomePage extends BasePage {
     constructor(driver: WebDriver) {
         super(driver, '/');
     }

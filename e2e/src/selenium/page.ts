@@ -10,7 +10,7 @@ import { WebDriver } from 'selenium-webdriver';
  */
 export abstract class Page {
     /** The WebDriver */
-    private readonly driver: WebDriver;
+    protected readonly driver: WebDriver;
 
     /** The URL to this page */
     private readonly url: string;
