@@ -4,11 +4,11 @@ import { createPage } from '../selenium';
 import { startLoginPage } from './startLoginPage';
 
 When('I start authentication as {string}', async (email: string) => {
-    const basepage = createPage(basePage);
+    const basepage = await createPage(basePage);
     const header = await basepage.header;
     await header.login();
 
-    const loginPage = createPage(startLoginPage);
+    const loginPage = await createPage(startLoginPage);
     await loginPage.setEmail(email);
     await loginPage.submit();
 });

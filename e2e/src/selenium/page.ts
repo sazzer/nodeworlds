@@ -34,4 +34,13 @@ export abstract class Page extends PageObject {
 
         await (this.base as WebDriver).get(fullUrl);
     }
+
+    /**
+     * Verify that we're actually on the correct page
+     *
+     * @memberof Page
+     */
+    public async verifyPage() {
+        // Nothing here
+    }
 }

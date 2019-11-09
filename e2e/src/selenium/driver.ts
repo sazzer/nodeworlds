@@ -48,9 +48,13 @@ export async function quit() {
  * @param {(driver: WebDriver) => T} constructor the constructor function to use
  * @returns {T} the page model
  */
-export function createPage<T extends Page>(constructor: (driver: WebDriver) => T): T {
+export async function createPage<T extends Page>(constructor: (driver: WebDriver) => T): Promise<T> {
     if (driver === undefined) {
         throw new Error('No WebDriver available');
     }
-    return constructor(driver);
+
+    const page = constructor(driver);
+    await page.verifyPage();
+
+    return page;
 }

@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import { WebDriver } from 'selenium-webdriver';
 import { Page } from '../selenium';
 
@@ -16,6 +17,17 @@ export class StartLoginPage extends Page {
      */
     constructor(driver: WebDriver) {
         super(driver, '/login');
+    }
+
+    /**
+     * Verify that we're actually on the correct page
+     *
+     * @memberof Page
+     */
+    public async verifyPage() {
+        const form = await this.findElement('form[data-test="startLoginForm"]');
+        const displayed = await form.isDisplayed();
+        expect(displayed, 'Start Login Form Visibility').to.eq(true);
     }
 
     /**
