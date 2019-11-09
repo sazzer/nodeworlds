@@ -6,7 +6,7 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
     && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
 WORKDIR /nodeworlds/e2e
-COPY package.json tsconfig.json yarn.lock /nodeworlds/e2e/
+COPY package.json tsconfig.json yarn.lock report.js /nodeworlds/e2e/
 RUN yarn install
 
 COPY e2e /nodeworlds/e2e/e2e

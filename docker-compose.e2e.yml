@@ -32,6 +32,11 @@ services:
       context: .
       dockerfile: Dockerfile-e2e
     entrypoint: dockerize -wait tcp://nodeworlds-e2e-service:3000 -wait tcp://nodeworlds-e2e-chrome:4444 yarn e2e
+    environment:
+      - SELENIUM_BROWSER=chrome
+      - SELENIUM_REMOTE_URL=http://nodeworlds-e2e-chrome:4444/wd/hub
+    volumes:
+      - ./output/docker:/nodeworlds/e2e/output/e2e/
     networks:
       - nodeworlds-e2e
 
