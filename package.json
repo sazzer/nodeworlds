@@ -11,9 +11,9 @@
     "docker": "docker build -t nodeworlds .",
     "e2e": "run-s -cn e2e:prepare e2e:run e2e:report",
     "e2e:prepare": "mkdirp output/e2e",
-    "e2e:run": "cucumber-js --require-module ts-node/register --require 'e2e/**/*.ts' -f node_modules/cucumber-pretty -f json:output/e2e/cucumber_report.json e2e/features --tags 'not @ignore' --tags 'not @wip'",
+    "e2e:run": "cucumber-js --require-module ts-node/register --require-module dotenv/config --require 'e2e/**/*.ts' -f node_modules/cucumber-pretty -f json:output/e2e/cucumber_report.json e2e/features --tags 'not @ignore' --tags 'not @wip'",
     "e2e:report": "node report.js",
-    "e2e:wip": "cucumber-js --require-module ts-node/register --require 'e2e/**/*.ts' -f node_modules/cucumber-pretty e2e/features --tags '@wip'",
+    "e2e:wip": "cucumber-js --require-module ts-node/register --require-module dotenv/config --require 'e2e/**/*.ts' -f node_modules/cucumber-pretty e2e/features --tags '@wip'",
     "e2e:docker": "docker-compose -f docker-compose.e2e.yml up --exit-code-from=nodeworlds-e2e-tests --build --force-recreate"
   },
   "devDependencies": {

@@ -9,7 +9,9 @@ Before(async () => {
         .forBrowser('chrome')
         .build();
 
-    await driver.get('http://www.google.com');
+    const baseUrl = process.env.SELENIUM_BASE_URL || '';
+
+    await driver.get(baseUrl);
 });
 
 After(async function() {

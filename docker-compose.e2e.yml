@@ -35,6 +35,7 @@ services:
     environment:
       - SELENIUM_BROWSER=chrome
       - SELENIUM_REMOTE_URL=http://nodeworlds-e2e-chrome:4444/wd/hub
+      - SELENIUM_BASE_URL=http://nodeworlds-e2e-service:3000/
     volumes:
       - ./output/docker:/nodeworlds/e2e/output/e2e/
     networks:
