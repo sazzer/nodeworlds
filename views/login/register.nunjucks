@@ -6,7 +6,7 @@
         <div class="header">{{ t("login.title.register") }}</div>
     </div>
     <div class="content">
-        <form action="/login" method="post" class="ui form {{ "error" if problems }}">
+        <form action="/login" method="post" class="ui form {{ "error" if problems }}" data-test="registerForm">
             <input type="hidden" name="action" value="register" />
             <div class="required field">
                 <label for="email">{{ t("login.email.label") }}</label>
