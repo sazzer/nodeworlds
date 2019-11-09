@@ -1,4 +1,4 @@
-import { Locator, WebDriver, WebElement } from 'selenium-webdriver';
+import { By, WebDriver, WebElement } from 'selenium-webdriver';
 
 /** The base type that this revolves around */
 type BaseElement = WebDriver | WebElement;
@@ -30,7 +30,7 @@ export class PageObject {
      * @returns the web element
      * @memberof PageObject
      */
-    protected findElement(locator: Locator) {
-        return this.base.findElement(locator);
+    protected findElement(locator: string) {
+        return this.base.findElement(By.css(locator));
     }
 }

@@ -6,7 +6,7 @@
         <div class="header">{{ t("login.title.start") }}</div>
     </div>
     <div class="content">
-        <form action="/login" method="post" class="ui form">
+        <form action="/login" method="post" class="ui form" data-test="startLoginForm">
             <div class="required field">
                 <label for="email">{{ t("login.email.label") }}</label>
                 <input type="email"
