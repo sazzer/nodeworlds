@@ -1,4 +1,5 @@
 import { By, WebElement } from 'selenium-webdriver';
+import { PageObject } from '../selenium';
 
 /**
  * Page object representing the header bar
@@ -6,17 +7,14 @@ import { By, WebElement } from 'selenium-webdriver';
  * @export
  * @class Header
  */
-export class Header {
-    /** The Web Element that is the base for this object */
-    private readonly base: WebElement;
-
+export class Header extends PageObject {
     /**
      * Construct the header
      * @param {WebElement} base The base element
      * @memberof Header
      */
     constructor(base: WebElement) {
-        this.base = base;
+        super(base);
     }
 
     /**
@@ -25,7 +23,7 @@ export class Header {
      * @memberof Header
      */
     public async login() {
-        const loginLink = await this.base.findElement(By.css('a.right.item'));
+        const loginLink = await this.findElement(By.css('a.right.item'));
         await loginLink.click();
     }
 
