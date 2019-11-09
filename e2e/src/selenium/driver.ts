@@ -1,4 +1,5 @@
-import { Builder, ThenableWebDriver } from 'selenium-webdriver';
+import { Builder, ThenableWebDriver, WebDriver } from 'selenium-webdriver';
+import { Page } from './page';
 
 /** The actual web driver */
 let driver: ThenableWebDriver | undefined;
@@ -37,4 +38,19 @@ export async function quit() {
     if (driver) {
         await driver.quit();
     }
+}
+
+/**
+ * Create a page model for the current browser state
+ *
+ * @export
+ * @template T the type of page model to create
+ * @param {(driver: WebDriver) => T} constructor the constructor function to use
+ * @returns {T} the page model
+ */
+export function createPage<T extends Page>(constructor: (driver: WebDriver) => T): T {
+    if (driver === undefined) {
+        throw new Error('No WebDriver available');
+    }
+    return constructor(driver);
 }
