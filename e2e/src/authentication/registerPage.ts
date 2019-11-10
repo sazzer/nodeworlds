@@ -31,15 +31,42 @@ export class RegisterPage extends Page {
     }
 
     /**
-     * Get the email address to register as
+     * Get the field with the given name
      *
+     * @param {string} field The name of the field
+     * @returns the value of the field
      * @memberof RegisterPage
      */
-    public async getEmail() {
-        const emailInput = await this.findElement('form[data-test="registerForm"] input[name="email"]');
-        return await emailInput.getAttribute('value');
+    public async getField(field: string) {
+        const input = await this.findElement(`form[data-test="registerForm"] input[name="${field}"]`);
+        return await input.getAttribute('value');
     }
 
+    /**
+     * Set the value of the field with the given name
+     *
+     * @param {string} field The name of the field
+     * @param {string} value The new value of the field
+     * @memberof RegisterPage
+     */
+    public async setField(field: string, value: string) {
+        const input = await this.findElement(`form[data-test="registerForm"] input[name="${field}"]`);
+        await input.clear();
+        await input.sendKeys(value);
+    }
+
+    /**
+     * Get the list of errors on the form
+     *
+     * @returns
+     * @memberof RegisterPage
+     */
+    public async getErrors() {
+        const errorFields = await this.findElements('.ui.error.message p');
+
+        const messages = errorFields.map(async field => await field.getText());
+        return Promise.all(messages);
+    }
     /**
      * Submit the form
      *

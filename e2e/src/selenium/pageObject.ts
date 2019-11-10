@@ -33,4 +33,16 @@ export class PageObject {
     protected findElement(locator: string) {
         return this.base.findElement(By.css(locator));
     }
+
+    /**
+     * Find the elements with the given locator
+     *
+     * @protected
+     * @param {Locator} locator the locator
+     * @returns the web elements
+     * @memberof PageObject
+     */
+    protected findElements(locator: string) {
+        return this.base.findElements(By.css(locator));
+    }
 }

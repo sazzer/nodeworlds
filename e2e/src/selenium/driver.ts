@@ -37,6 +37,7 @@ export async function takeScreenshot() {
 export async function quit() {
     if (driver) {
         await driver.quit();
+        driver = undefined;
     }
 }
 
