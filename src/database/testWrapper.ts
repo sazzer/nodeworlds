@@ -1,6 +1,6 @@
 import debug from 'debug';
 import { Pool } from 'pg';
-import { GenericContainer, StartedTestContainer } from 'testcontainers';
+import { GenericContainer, StartedTestContainer, Wait } from 'testcontainers';
 import { migrateDb } from './migrate';
 
 /** The logger to use */
@@ -42,14 +42,19 @@ export class DatabaseTestWrapper {
      */
     public async start() {
         logger('Starting database');
-        this.container = await new GenericContainer('postgres', '11.5-alpine')
+        const container = new GenericContainer('postgres', '11.5-alpine')
             .withExposedPorts(5432)
+            .withWaitStrategy(Wait.forLogMessage('listening on IPv4 address "0.0.0.0", port 5432'))
             .withEnv('POSTGRES_DB', 'nodeworlds-test')
             .withEnv('POSTGRES_USER', 'nodeworlds-test')
-            .withEnv('POSTGRES_PASSWORD', 'nodeworlds-test')
-            .start();
+            .withEnv('POSTGRES_PASSWORD', 'nodeworlds-test');
 
-        this.url = `postgresql://nodeworlds-test:nodeworlds-test@${this.container.getContainerIpAddress()}:${this.container.getMappedPort(5432)}/nodeworlds-test`;
+        this.container = await container.start();
+
+        await new Promise(resolve => setTimeout(resolve, 200));
+
+        const databaseHost = process.env.TEST_DOCKER_HOST || this.container.getContainerIpAddress();
+        this.url = `postgresql://nodeworlds-test:nodeworlds-test@${databaseHost}:${this.container.getMappedPort(5432)}/nodeworlds-test`;
         logger('Started database: %s', this.url);
 
         this.pgPool = new Pool({
@@ -57,6 +62,7 @@ export class DatabaseTestWrapper {
         });
 
         await migrateDb(this.url);
+        logger('Started database');
     }
 
     /**

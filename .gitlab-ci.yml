@@ -1,0 +1,46 @@
+stages:
+  - build
+  - e2e
+
+build:
+  stage: build
+  image: node:latest
+  services:
+    - docker:dind
+
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+    TEST_DOCKER_HOST: docker
+
+  before_script:
+    - yarn install
+
+  script:
+    - DEBUG=*,-modem yarn test
+
+  cache:
+    paths:
+      - node_modules
+
+e2e:
+  stage: e2e
+  image: docker/compose:1.25.0-rc4
+  services:
+    - docker:dind
+
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+    TEST_DOCKER_HOST: docker
+
+  script:
+    - docker-compose -f docker-compose.e2e.yml up --exit-code-from=nodeworlds-e2e-tests
+
+  cache:
+    paths:
+      - node_modules
+
+  artifacts:
+    paths:
+      - output/docker/*

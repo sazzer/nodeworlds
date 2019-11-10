@@ -14,11 +14,11 @@ describe('Users DAO', () => {
         await container.start();
 
         dao = new testSubject.UserDao(container.pool());
-    }, 30000);
+    }, 120000);
 
     afterEach(async () => {
         await container.stop();
-    }, 30000);
+    }, 150000);
 
     describe('findUserByEmail', () => {
         it('Finds a user that does exist', async () => {
