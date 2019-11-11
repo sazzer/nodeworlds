@@ -1,5 +1,9 @@
+import debug from 'debug';
 import { Builder, ThenableWebDriver, WebDriver } from 'selenium-webdriver';
 import { Page } from './page';
+
+/** The logger to use */
+const logger = debug('nodeworlds:e2e:selenium:driver');
 
 /** The actual web driver */
 let driver: ThenableWebDriver | undefined;
@@ -12,6 +16,7 @@ let driver: ThenableWebDriver | undefined;
 export async function newDriver() {
     await quit();
 
+    logger('Starting new WebDriver');
     driver = new Builder()
         .forBrowser('chrome')
         .build();
@@ -25,6 +30,7 @@ export async function newDriver() {
  */
 export async function takeScreenshot() {
     if (driver) {
+        logger('Taking screenshot');
         return await driver.takeScreenshot();
     }
 }
@@ -36,6 +42,7 @@ export async function takeScreenshot() {
  */
 export async function quit() {
     if (driver) {
+        logger('Closing webdriver');
         await driver.quit();
         driver = undefined;
     }
@@ -54,6 +61,7 @@ export async function createPage<T extends Page>(constructor: (driver: WebDriver
         throw new Error('No WebDriver available');
     }
 
+    logger('Creating page model: %o', constructor);
     const page = constructor(driver);
     await page.verifyPage();
 

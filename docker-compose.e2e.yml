@@ -33,6 +33,8 @@ services:
       dockerfile: Dockerfile-e2e
     entrypoint: dockerize -wait tcp://nodeworlds-e2e-service:3000 -wait tcp://nodeworlds-e2e-chrome:4444 yarn e2e
     environment:
+      - DEBUG=nodeworlds:*
+      - POSTGRES_URL=postgresql://nodeworlds:nodeworlds@nodeworlds-e2e-postgres:5432/nodeworlds
       - SELENIUM_BROWSER=chrome
       - SELENIUM_REMOTE_URL=http://nodeworlds-e2e-chrome:4444/wd/hub
       - SELENIUM_BASE_URL=http://nodeworlds-e2e-service:3000/
