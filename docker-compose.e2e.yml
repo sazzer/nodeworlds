@@ -18,7 +18,7 @@ services:
       - DEBUG=nodeworlds:*
       - POSTGRES_URL=postgresql://nodeworlds:nodeworlds@nodeworlds-e2e-postgres:5432/nodeworlds
       - PORT=3000
-      - DOCKERIZE=-wait tcp://nodeworlds-e2e-postgres:5432
+      - DOCKERIZE=-wait tcp://nodeworlds-e2e-postgres:5432 -timeout 30s
     networks:
       - nodeworlds-e2e
 
@@ -31,7 +31,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-e2e
-    entrypoint: dockerize -wait tcp://nodeworlds-e2e-service:3000 -wait tcp://nodeworlds-e2e-chrome:4444 yarn e2e
+    entrypoint: dockerize -timeout 60s -wait tcp://nodeworlds-e2e-service:3000 -wait tcp://nodeworlds-e2e-chrome:4444 yarn e2e
     environment:
       - DEBUG=nodeworlds:*
       - POSTGRES_URL=postgresql://nodeworlds:nodeworlds@nodeworlds-e2e-postgres:5432/nodeworlds
