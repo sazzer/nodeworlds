@@ -30,3 +30,16 @@ export function closePool() {
     logger('Closing database connection');
     pgPool = undefined;
 }
+
+/**
+ * Get the connection pool to work with
+ *
+ * @export
+ * @returns the connection pool
+ */
+export function pool(): Pool {
+    if (pgPool === undefined) {
+        throw new Error('No connection available');
+    }
+    return pgPool;
+}
