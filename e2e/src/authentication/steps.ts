@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import { TableDefinition, Then, When } from 'cucumber';
 import { basePage } from '../base';
 import { createPage } from '../selenium';
+import { loginPage } from './loginPage';
 import { registerPage } from './registerPage';
 import { startLoginPage } from './startLoginPage';
 
@@ -35,6 +36,12 @@ When('I register with details:', async (details: TableDefinition) => {
 
 Then('I am registering a new user of {string}', async (email: string) => {
     const page = await createPage(registerPage);
+    const emailValue = await page.getField('email');
+    expect(emailValue).to.eq(email);
+});
+
+Then('I am logging in as {string}', async (email: string) => {
+    const page = await createPage(loginPage);
     const emailValue = await page.getField('email');
     expect(emailValue).to.eq(email);
 });
