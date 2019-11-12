@@ -2,23 +2,10 @@ import debug from 'debug';
 import { Pool } from 'pg';
 import { GenericContainer, StartedTestContainer, Wait } from 'testcontainers';
 import { migrateDb } from './migrate';
+import { SeedData } from './seed';
 
 /** The logger to use */
 const logger = debug('nodeworlds:database:testWrapper');
-
-/**
- * Interface representing some seed data to add to the database
- *
- * @export
- * @interface SeedData
- */
-export interface SeedData {
-    /** The SQL to use for inserting the data */
-    readonly sql: string;
-
-    /** The binds for the SQL */
-    binds(): Promise<any[]>;
-}
 
 /**
  * Wrapper around a Postgres Database for use in tests

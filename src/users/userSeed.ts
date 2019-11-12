@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { SeedData } from '../database/testWrapper';
+import { SeedData } from '../database/seed';
 import { hashPassword } from './password';
 
 /**
