@@ -17,7 +17,7 @@ describe('loginHandler', () => {
     describe('When no action is provided', () => {
         const request = {
             body: {
-                email: 'fakeuser@example.com',
+                username: 'testuser',
             },
         } as Request;
 
@@ -37,7 +37,7 @@ describe('loginHandler', () => {
         const request = {
             body: {
                 action: 'register',
-                email: 'fakeuser@example.com',
+                username: 'testuser',
             },
         } as Request;
 

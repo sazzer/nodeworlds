@@ -22,6 +22,9 @@ export class UserSeed implements SeedData {
     /** The updated date */
     public readonly updated: Date;
 
+    /** The username */
+    public readonly username: string;
+
     /** The email address */
     public readonly email: string;
 
@@ -41,6 +44,7 @@ export class UserSeed implements SeedData {
         version?: string;
         created?: Date;
         updated?: Date;
+        username?: string;
         email?: string;
         name?: string;
         password?: string;
@@ -49,14 +53,15 @@ export class UserSeed implements SeedData {
         this.version = data.version || uuid();
         this.created = data.created || new Date();
         this.updated = data.updated || new Date();
+        this.username = data.username || `test-${uuid()}`;
         this.email = data.email || `test-${uuid()}@example.com`;
         this.name = data.name || 'Test User';
         this.password = data.password || 'SuperSecretPassword';
     }
 
     /** The SQL to use to insert the record */
-    public readonly sql: string = `INSERT INTO users(user_id, version, created, updated, email, name, password)
-    VALUES ($1, $2, $3, $4, $5, $6, $7)`;
+    public readonly sql: string = `INSERT INTO users(user_id, version, created, updated, username, email, name, password)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`;
 
     /** The binds for the SQL */
     public async binds(): Promise<any[]> {
@@ -65,6 +70,7 @@ export class UserSeed implements SeedData {
             this.version,
             this.created,
             this.updated,
+            this.username,
             this.email,
             this.name,
             await hashPassword(this.password),

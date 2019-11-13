@@ -9,7 +9,7 @@ describe('register', () => {
         it('Renders the correct view', async () => {
             const request = {
                 body: {
-                    email: 'known@example.com',
+                    username: 'testuser',
                     action: 'register',
                 },
             } as Request;
@@ -20,9 +20,11 @@ describe('register', () => {
 
             expect(response.render).toBeCalledTimes(1);
             expect(response.render).toBeCalledWith('login/register', {
-                email: 'known@example.com',
+                username: 'testuser',
+                email: undefined,
                 name: undefined,
                 problems: {
+                    email: ['missing'],
                     name: ['missing'],
                     password: ['missing'],
                     password2: ['missing'],
@@ -35,6 +37,7 @@ describe('register', () => {
         it('Renders the correct view', async () => {
             const request = {
                 body: {
+                    username: 'testuser',
                     email: 'known@example.com',
                     name: 'Graham',
                     password: 'password',
@@ -49,6 +52,7 @@ describe('register', () => {
 
             expect(response.render).toBeCalledTimes(1);
             expect(response.render).toBeCalledWith('login/register', {
+                username: 'testuser',
                 email: 'known@example.com',
                 name: 'Graham',
                 problems: {

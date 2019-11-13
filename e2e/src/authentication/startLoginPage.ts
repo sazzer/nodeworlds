@@ -31,15 +31,16 @@ export class StartLoginPage extends Page {
     }
 
     /**
-     * Set the email address to log in as
+     * Set the value of the field with the given name
      *
-     * @param {string} email the email address
-     * @memberof StartLoginPage
+     * @param {string} field The name of the field
+     * @param {string} value The new value of the field
+     * @memberof LoginPage
      */
-    public async setEmail(email: string) {
-        const emailInput = await this.findElement('form[data-test="startLoginForm"] input[name="email"]');
-        await emailInput.clear();
-        await emailInput.sendKeys(email);
+    public async setField(field: string, value: string) {
+        const input = await this.findElement(`form[data-test="startLoginForm"] input[name="${field}"]`);
+        await input.clear();
+        await input.sendKeys(value);
     }
 
     /**

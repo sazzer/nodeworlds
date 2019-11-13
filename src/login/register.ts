@@ -11,11 +11,11 @@ const logger = debug('nodeworlds:login:register');
  * @param res the response
  */
 export async function register(req: Request, res: Response, userService: UserService) {
-    const email = req.body.email;
+    const username = req.body.username;
 
     const problems: { [key: string]: string[] } = {};
 
-    ['email', 'name', 'password', 'password2'].forEach(field => {
+    ['username', 'email', 'name', 'password', 'password2'].forEach(field => {
         problems[field] = [];
         if ((req.body[field] || '').trim() === '') {
             problems[field].push('missing');
@@ -34,7 +34,8 @@ export async function register(req: Request, res: Response, userService: UserSer
     logger('Problems with registration: %o', problems);
 
     return res.render('login/register', {
-        email,
+        username,
+        email: req.body.email,
         name: req.body.name,
         problems,
     });

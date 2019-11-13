@@ -10,6 +10,9 @@ export type UserId = string;
  * @interface UserData
  */
 export interface UserData {
+    /** The users username */
+    username: string;
+
     /** The users email address */
     email: string;
 

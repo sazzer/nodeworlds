@@ -9,15 +9,14 @@
         <form action="/login" method="post" class="ui form" data-test="loginForm">
             <input type="hidden" name="action" value="login" />
             <div class="required field">
-                <label for="email">{{ t("login.email.label") }}</label>
-                <input type="email"
-                       id="email"
-                       name="email"
-                       placeholder="{{ t("login.email.placeholder") }}"
-                       value="{{ email }}"
+                <label for="username">{{ t("login.username.label") }}</label>
+                <input type="text"
+                       id="username"
+                       name="username"
+                       placeholder="{{ t("login.username.placeholder") }}"
+                       value="{{ username }}"
                        readonly
                        required  />
-                <span class="ui small text">{{ t("login.email.help") }}</span>
             </div>
             <div class="required field">
                 <label for="password">{{ t("login.password.label") }}</label>

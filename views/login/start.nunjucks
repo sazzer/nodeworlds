@@ -8,14 +8,13 @@
     <div class="content">
         <form action="/login" method="post" class="ui form" data-test="startLoginForm">
             <div class="required field">
-                <label for="email">{{ t("login.email.label") }}</label>
-                <input type="email"
-                       id="email"
-                       name="email"
-                       placeholder="{{ t("login.email.placeholder") }}"
+                <label for="username">{{ t("login.username.label") }}</label>
+                <input type="text"
+                       id="username"
+                       name="username"
+                       placeholder="{{ t("login.username.placeholder") }}"
                        required
                        autofocus />
-                <span class="ui small text">{{ t("login.email.help") }}</span>
             </div>
             <button class="ui fluid primary button" type="submit">{{ t("login.buttons.start") }}</button>
               <h4 class="ui horizontal divider">

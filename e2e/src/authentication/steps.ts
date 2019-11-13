@@ -6,14 +6,14 @@ import { loginPage } from './loginPage';
 import { registerPage } from './registerPage';
 import { startLoginPage } from './startLoginPage';
 
-When('I start authentication as {string}', async (email: string) => {
+When('I start authentication as {string}', async (username: string) => {
     const basepage = await createPage(basePage);
     const header = await basepage.header;
     await header.login();
 
-    const loginPage = await createPage(startLoginPage);
-    await loginPage.setEmail(email);
-    await loginPage.submit();
+    const loginpage = await createPage(startLoginPage);
+    await loginpage.setField('username', username);
+    await loginpage.submit();
 });
 
 When('I register with details:', async (details: TableDefinition) => {
@@ -22,6 +22,7 @@ When('I register with details:', async (details: TableDefinition) => {
 
     const fieldMapping: { [key: string]: string } = {
         'Name': 'name',
+        'Email Address': 'email',
         'Password': 'password',
         'Repeat Password': 'password2',
     };
@@ -36,14 +37,14 @@ When('I register with details:', async (details: TableDefinition) => {
 
 Then('I am registering a new user of {string}', async (email: string) => {
     const page = await createPage(registerPage);
-    const emailValue = await page.getField('email');
-    expect(emailValue).to.eq(email);
+    const value = await page.getField('username');
+    expect(value).to.eq(email);
 });
 
 Then('I am logging in as {string}', async (email: string) => {
     const page = await createPage(loginPage);
-    const emailValue = await page.getField('email');
-    expect(emailValue).to.eq(email);
+    const value = await page.getField('username');
+    expect(value).to.eq(email);
 });
 
 Then('registration fails with errors:', async (errors: TableDefinition) => {

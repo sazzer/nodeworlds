@@ -8,12 +8,12 @@ import { initialLoginForm } from './initial';
  * @param res the response
  */
 export async function startLogin(req: Request, res: Response, userRetriever: UserRetriever) {
-    const email = req.body.email;
+    const username = req.body.username;
 
-    if (email) {
-        const user = await userRetriever.findUserByEmail(email);
+    if (username) {
+        const user = await userRetriever.findUserByUsername(username);
         const view = user === undefined ? 'login/register' : 'login/login';
-        return res.render(view, { email });
+        return res.render(view, { username });
     } else {
         return initialLoginForm(req, res);
     }

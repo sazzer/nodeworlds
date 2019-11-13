@@ -20,13 +20,13 @@ describe('Users DAO', () => {
         await container.stop();
     }, 150000);
 
-    describe('findUserByEmail', () => {
+    describe('findUserByUsername', () => {
         it('Finds a user that does exist', async () => {
             const user = await container.seed(new UserSeed({
-                email: 'testUser@example.com',
+                username: 'testUser',
             }));
 
-            const foundUser = await dao.findUserByEmail(user.email);
+            const foundUser = await dao.findUserByUsername(user.username);
             expect(foundUser).toEqual({
                 identity: {
                     id: user.userId,
@@ -35,6 +35,7 @@ describe('Users DAO', () => {
                     updated: user.updated,
                 },
                 data: {
+                    username: user.username,
                     email: user.email,
                     name: user.name,
                     password: expect.any(String),
@@ -42,7 +43,7 @@ describe('Users DAO', () => {
             });
         });
         it('Doesn\'t find a user that doesn\'t exist', async () => {
-            const foundUser = await dao.findUserByEmail('unknown@example.com');
+            const foundUser = await dao.findUserByUsername('unknown');
             expect(foundUser).toBeUndefined();
         });
     });

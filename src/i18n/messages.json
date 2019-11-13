@@ -17,10 +17,17 @@
       "login": "Login",
       "register": "Register"
     },
+    "username": {
+      "label": "Username",
+      "placeholder": "Username"
+    },
     "email": {
       "label": "Email Address",
       "placeholder": "Email Address",
-      "help": "We'll never share your email with anyone else."
+      "help": "We'll never share your email with anyone else.",
+      "problems": {
+        "missing": "Email Address is required"
+      }
     },
     "name": {
       "label": "Name",

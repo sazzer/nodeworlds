@@ -24,16 +24,16 @@ export class UserDao implements UserService {
     }
 
     /**
-     * Find the user with the provided Email Address, if there is one
+     * Find the user with the provided username, if there is one
      *
-     * @param {string} email the email address to look for
+     * @param {string} username the username to look for
      * @returns {Promise<Model<UserId, UserData>>} the user that matches
      * @memberof UserDao
      */
-    public async findUserByEmail(email: string): Promise<Model<UserId, UserData> | undefined> {
-        logger('Finding user with email address: %s', email);
+    public async findUserByUsername(username: string): Promise<Model<UserId, UserData> | undefined> {
+        logger('Finding user with username: %s', username);
 
-        const user = await this.db.query('SELECT * FROM users WHERE email = $1', [email]);
+        const user = await this.db.query('SELECT * FROM users WHERE username = $1', [username]);
 
         if (user.rows.length === 1) {
             const userRow = user.rows[0];
@@ -45,6 +45,7 @@ export class UserDao implements UserService {
                     updated: userRow.updated,
                 },
                 data: {
+                    username: userRow.username,
                     email: userRow.email,
                     name: userRow.name,
                     password: userRow.password,
@@ -53,7 +54,7 @@ export class UserDao implements UserService {
             logger('Found user: %o', result);
             return result;
         } else {
-            logger('No user found for email address %s', email);
+            logger('No user found for username %s', username);
             return undefined;
         }
     }

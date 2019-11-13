@@ -10,6 +10,7 @@ const mappedFields: { [field: string]: any } = {
     'Version': 'version',
     'Created': 'created',
     'Updated': 'updated',
+    'Username': 'username',
     'Email Address': 'email',
     'Name': 'name',
     'Password': 'password',

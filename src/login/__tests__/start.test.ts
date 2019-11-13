@@ -6,7 +6,7 @@ import * as testSubject from '../start';
 describe('startLogin', () => {
     const userRetriever = {} as UserRetriever;
 
-    describe('When no email is present', () => {
+    describe('When no username is present', () => {
         const request = {
             body: {
 
@@ -24,15 +24,15 @@ describe('startLogin', () => {
         });
     });
 
-    describe('When an unknown email is present', () => {
+    describe('When an unknown username is present', () => {
         const request = {
             body: {
-                email: 'unknown@example.com',
+              username: 'unknown',
             },
         } as Request;
 
         beforeEach(() => {
-            userRetriever.findUserByEmail = jest.fn().mockReturnValue(Promise.resolve(undefined));
+            userRetriever.findUserByUsername = jest.fn().mockReturnValue(Promise.resolve(undefined));
         });
 
         it('Renders the correct view', async () => {
@@ -42,7 +42,7 @@ describe('startLogin', () => {
             await testSubject.startLogin(request, response, userRetriever);
 
             expect(response.render).toBeCalledTimes(1);
-            expect(response.render).toBeCalledWith('login/register', { email: 'unknown@example.com' });
+            expect(response.render).toBeCalledWith('login/register', { username: 'unknown' });
         });
 
         it('Calls the User Retriever as expected', async () => {
@@ -51,20 +51,21 @@ describe('startLogin', () => {
 
             await testSubject.startLogin(request, response, userRetriever);
 
-            expect(userRetriever.findUserByEmail).toBeCalledTimes(1);
-            expect(userRetriever.findUserByEmail).toBeCalledWith('unknown@example.com');
+            expect(userRetriever.findUserByUsername).toBeCalledTimes(1);
+            expect(userRetriever.findUserByUsername).toBeCalledWith('unknown');
         });
     });
 
-    describe('When a known email is present', () => {
+    describe('When a known username is present', () => {
         const request = {
             body: {
-                email: 'known@example.com',
+              username: 'testuser',
             },
         } as Request;
 
         beforeEach(() => {
-            userRetriever.findUserByEmail = jest.fn().mockReturnValue(Promise.resolve({} as Model<UserId, UserData>));
+            userRetriever.findUserByUsername = jest.fn()
+            .mockReturnValue(Promise.resolve({} as Model<UserId, UserData>));
         });
 
         it('Renders the correct view', async () => {
@@ -74,7 +75,7 @@ describe('startLogin', () => {
             await testSubject.startLogin(request, response, userRetriever);
 
             expect(response.render).toBeCalledTimes(1);
-            expect(response.render).toBeCalledWith('login/login', { email: 'known@example.com' });
+            expect(response.render).toBeCalledWith('login/login', { username: 'testuser' });
         });
 
         it('Calls the User Retriever as expected', async () => {
@@ -83,8 +84,8 @@ describe('startLogin', () => {
 
             await testSubject.startLogin(request, response, userRetriever);
 
-            expect(userRetriever.findUserByEmail).toBeCalledTimes(1);
-            expect(userRetriever.findUserByEmail).toBeCalledWith('known@example.com');
+            expect(userRetriever.findUserByUsername).toBeCalledTimes(1);
+            expect(userRetriever.findUserByUsername).toBeCalledWith('testuser');
         });
     });
 
