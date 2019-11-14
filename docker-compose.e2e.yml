@@ -22,21 +22,16 @@ services:
     networks:
       - nodeworlds-e2e
 
-  nodeworlds-e2e-chrome:
-    image: selenium/standalone-chrome:3.141.59-xenon
-    networks:
-      - nodeworlds-e2e
-
   nodeworlds-e2e-tests:
     build:
       context: .
       dockerfile: Dockerfile-e2e
-    entrypoint: dockerize -timeout 60s -wait tcp://nodeworlds-e2e-service:3000 -wait tcp://nodeworlds-e2e-chrome:4444 yarn e2e
+    entrypoint: dockerize -timeout 60s -wait tcp://nodeworlds-e2e-service:3000 -wait tcp://nodeworlds-e2e-selenium:4444 yarn e2e
     environment:
       - DEBUG=nodeworlds:*
       - POSTGRES_URL=postgresql://nodeworlds:nodeworlds@nodeworlds-e2e-postgres:5432/nodeworlds
       - SELENIUM_BROWSER=chrome
-      - SELENIUM_REMOTE_URL=http://nodeworlds-e2e-chrome:4444/wd/hub
+      - SELENIUM_REMOTE_URL=http://nodeworlds-e2e-selenium:4444/wd/hub
       - SELENIUM_BASE_URL=http://nodeworlds-e2e-service:3000/
     volumes:
       - ./output/docker:/nodeworlds/e2e/output/e2e/

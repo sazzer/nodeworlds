@@ -1,5 +1,6 @@
 import debug from 'debug';
 import { Builder, ThenableWebDriver, WebDriver } from 'selenium-webdriver';
+import { Options as ChromeOptions } from 'selenium-webdriver/chrome';
 import { Page } from './page';
 
 /** The logger to use */
@@ -17,9 +18,19 @@ export async function newDriver() {
     await quit();
 
     logger('Starting new WebDriver');
+
+    const chromeOptions = new ChromeOptions();
+
+    if (process.env.SELENIUM_CHROME_MOBILE) {
+      chromeOptions.setMobileEmulation({
+        deviceName: process.env.SELENIUM_CHROME_MOBILE,
+      });
+    }
+
     driver = new Builder()
-        .forBrowser('chrome')
-        .build();
+      .forBrowser('chrome')
+      .setChromeOptions(chromeOptions)
+      .build();
 }
 
 /**
@@ -46,6 +57,7 @@ export async function quit() {
         await driver.quit();
         driver = undefined;
     }
+    logger('Closed webdriver');
 }
 
 /**

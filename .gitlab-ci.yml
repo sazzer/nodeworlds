@@ -23,8 +23,7 @@ build:
     paths:
       - node_modules
 
-e2e:
-  stage: e2e
+.e2e:
   image: docker/compose:1.25.0-rc4
   services:
     - docker:dind
@@ -35,14 +34,28 @@ e2e:
     TEST_DOCKER_HOST: docker
 
   script:
-    - docker-compose -f docker-compose.e2e.yml up --exit-code-from=nodeworlds-e2e-tests
-
-  cache:
-    paths:
-      - node_modules
+    - docker-compose -f docker-compose.e2e.yml -f $E2E_BROWSER_FILE up --exit-code-from=nodeworlds-e2e-tests
 
   artifacts:
     paths:
       - output/docker/*
     when: always
     expire_in: 30 days
+
+e2e-chrome:
+  stage: e2e
+  extends: .e2e
+  variables:
+    E2E_BROWSER_FILE: docker-compose.e2e-chrome.yml
+
+e2e-chrome-mobile:
+  stage: e2e
+  extends: .e2e
+  variables:
+    E2E_BROWSER_FILE: docker-compose.e2e-chrome-mobile.yml
+
+e2e-firefox:
+  stage: e2e
+  extends: .e2e
+  variables:
+    E2E_BROWSER_FILE: docker-compose.e2e-firefox.yml

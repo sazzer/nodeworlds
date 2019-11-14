@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  nodeworlds-e2e-selenium:
+    image: selenium/standalone-chrome:3.141.59
+    networks:
+      - nodeworlds-e2e
+
+  nodeworlds-e2e-tests:
+    environment:
+      - SELENIUM_BROWSER=chrome
+      - SELENIUM_CHROME_MOBILE=Galaxy S5
+networks:
+  nodeworlds-e2e:
