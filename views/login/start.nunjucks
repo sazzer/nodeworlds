@@ -1,41 +1,24 @@
 {% extends "landing.nunjucks" %}
 
 {% block content %}
-<div class="ui card">
-    <div class="content">
-        <div class="header">{{ t("login.title.start") }}</div>
-    </div>
-    <div class="content">
-        <form action="/login" method="post" class="ui form" data-test="startLoginForm">
-            <div class="required field">
-                <label for="username">{{ t("login.username.label") }}</label>
-                <input type="text"
-                       id="username"
-                       name="username"
-                       placeholder="{{ t("login.username.placeholder") }}"
-                       required
-                       autofocus />
-            </div>
-            <button class="ui fluid primary button" type="submit">{{ t("login.buttons.start") }}</button>
-              <h4 class="ui horizontal divider">
-                Or
-              </h4>
-            <div class="field">
-                <button class="ui facebook fluid button">
-                  <i class="facebook icon"></i>Log In with Facebook
-                </button>
-            </div>
-            <div class="field">
-                <button class="ui google plus fluid button">
-                  <i class="google plus icon"></i>Log In with Google
-                </button>
-            </div>
-            <div class="field">
-                <button class="ui twitter fluid button">
-                  <i class="twitter icon"></i>Log In with Twitter
-                </button>
-            </div>
-        </form>
-    </div>
+<div class="card">
+  <div class="card-header">{{ t("login.title.start") }}</div>
+  <div class="card-body">
+
+    <form action="/login" method="post" data-test="startLoginForm">
+      <div class="form-group">
+        <label for="username">{{ t("login.username.label") }}</label>
+        <input type="text"
+               class="form-control"
+               id="username"
+               name="username"
+               placeholder="{{ t("login.username.placeholder") }}"
+               required
+               autofocus />
+      </div>
+      <button type="submit" class="btn btn-primary">{{ t("login.buttons.start") }}</button>
+    </form>
+
+  </div>
 </div>
 {% endblock %}

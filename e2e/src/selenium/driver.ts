@@ -1,7 +1,6 @@
 import debug from 'debug';
 import { Builder, ThenableWebDriver, WebDriver } from 'selenium-webdriver';
 import { Options as ChromeOptions } from 'selenium-webdriver/chrome';
-import { Page } from './page';
 
 /** The logger to use */
 const logger = debug('nodeworlds:e2e:selenium:driver');
@@ -61,21 +60,12 @@ export async function quit() {
 }
 
 /**
- * Create a page model for the current browser state
- *
- * @export
- * @template T the type of page model to create
- * @param {(driver: WebDriver) => T} constructor the constructor function to use
- * @returns {T} the page model
+ * Get the actual web Driver
+ * @return The web driver
  */
-export async function createPage<T extends Page>(constructor: (driver: WebDriver) => T): Promise<T> {
-    if (driver === undefined) {
-        throw new Error('No WebDriver available');
-    }
-
-    logger('Creating page model: %o', constructor);
-    const page = constructor(driver);
-    await page.verifyPage();
-
-    return page;
+export function getDriver(): WebDriver {
+  if (driver === undefined) {
+      throw new Error('No WebDriver available');
+  }
+  return driver;
 }

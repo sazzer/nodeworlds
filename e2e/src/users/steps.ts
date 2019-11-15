@@ -6,26 +6,26 @@ import { seed } from '../database';
  * The mappings between the Cucumber table fields and the seed data keys
  */
 const mappedFields: { [field: string]: any } = {
-    'User ID': 'userId',
-    'Version': 'version',
-    'Created': 'created',
-    'Updated': 'updated',
-    'Username': 'username',
-    'Email Address': 'email',
-    'Name': 'name',
-    'Password': 'password',
+  'User ID': 'userId',
+  'Version': 'version',
+  'Created': 'created',
+  'Updated': 'updated',
+  'Username': 'username',
+  'Email Address': 'email',
+  'Name': 'name',
+  'Password': 'password',
 };
 
 Given('a user exists with details:', async (user: TableDefinition) => {
-    const userData = user.rowsHash();
+  const userData = user.rowsHash();
 
-    const userSeedData: { [field: string]: any } = {};
-    Object.entries(userData).forEach(([field, value]) => {
-        const mappedField = mappedFields[field];
-        if (mappedField) {
-            userSeedData[mappedField] = value;
-        }
-    });
+  const userSeedData: { [field: string]: any } = {};
+  Object.entries(userData).forEach(([field, value]) => {
+    const mappedField = mappedFields[field];
+    if (mappedField) {
+      userSeedData[mappedField] = value;
+    }
+  });
 
-    seed(new UserSeed(userSeedData));
+  seed(new UserSeed(userSeedData));
 });

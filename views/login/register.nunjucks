@@ -1,69 +1,97 @@
 {% extends "landing.nunjucks" %}
 
 {% block content %}
-<div class="ui card">
-    <div class="content">
-        <div class="header">{{ t("login.title.register") }}</div>
-    </div>
-    <div class="content">
-        <form action="/login" method="post" class="ui form {{ "error" if problems }}" data-test="registerForm">
-            <input type="hidden" name="action" value="register" />
-            <div class="required field">
-                <label for="username">{{ t("login.username.label") }}</label>
-                <input type="text"
-                       id="username"
-                       name="username"
-                       placeholder="{{ t("login.username.placeholder") }}"
-                       value="{{ username }}"
-                       readonly
-                       required  />
-            </div>
-            <div class="required field {{ "error" if problems.name }}">
-                <label for="name">{{ t("login.name.label") }}</label>
-                <input type="text"
-                       id="name"
-                       name="name"
-                       placeholder="{{ t("login.name.placeholder") }}"
-                       value="{{ name if name }}"
-                       autofocus
-                       required  />
-                <span class="ui small text">{{ t("login.name.help") }}</span>
-            </div>
-            <div class="required field {{ "error" if problems.email }}">
-                <label for="email">{{ t("login.email.label") }}</label>
-                <input type="text"
-                       id="email"
-                       name="email"
-                       placeholder="{{ t("login.email.placeholder") }}"
-                       value="{{ email if email }}"
-                       required  />
-                <span class="ui small text">{{ t("login.email.help") }}</span>
-            </div>
-            <div class="required field {{ "error" if problems.password }}">
-                <label for="password">{{ t("login.password.label") }}</label>
-                <input type="password"
-                       id="password"
-                       name="password"
-                       placeholder="{{ t("login.password.placeholder") }}"
-                       required  />
-            </div>
-            <div class="required field {{ "error" if problems.password2 }}">
-                <label for="password2">{{ t("login.password2.label") }}</label>
-                <input type="password"
-                       id="password2"
-                       name="password2"
-                       placeholder="{{ t("login.password2.placeholder") }}"
-                       required  />
-            </div>
-            <button class="ui fluid primary button" type="submit">{{ t("login.buttons.register") }}</button>
-            <div class="ui error message">
-                {% for field, fieldProblems in problems %}
-                    {% for problem in fieldProblems %}
-                        <p>{{ t('login.' + field + '.problems.' + problem) }}</p>
-                    {% endfor %}
-                {% endfor %}
-            </div>
-        </form>
-    </div>
+<div class="card">
+  <div class="card-header">{{ t("login.title.start") }}</div>
+  <div class="card-body">
+
+    <form action="/login" method="post" data-test="registerForm">
+      <input type="hidden" name="action" value="register" />
+      <div class="form-group" data-test="usernameField">
+        <label for="username">{{ t("login.username.label") }}</label>
+        <input type="text"
+               class="form-control"
+               id="username"
+               name="username"
+               value="{{ username }}"
+               placeholder="{{ t("login.username.placeholder") }}"
+               required
+               readonly />
+      </div>
+      <div class="form-group" data-test="nameField">
+        <label for="name">{{ t("login.name.label") }}</label>
+        <input type="text"
+               class="form-control {{ "is-invalid" if problems.name }}"
+               aria-describedby="nameHelp"
+               id="name"
+               name="name"
+               value="{{ name if name }}"
+               placeholder="{{ t("login.name.placeholder") }}"
+               required
+               autofocus />
+        <small id="nameHelp" class="form-text text-muted">{{ t("login.name.help") }}</small>
+        {%if problems.name %}
+        <div class="invalid-feedback">
+          {% for problem in problems.name %}
+              <div>{{ t('login.name.problems.' + problem) }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="form-group" data-test="emailField">
+        <label for="email">{{ t("login.email.label") }}</label>
+        <input type="email"
+               class="form-control {{ "is-invalid" if problems.email }}"
+               aria-describedby="emailHelp"
+               id="email"
+               name="email"
+               value="{{ email if email }}"
+               placeholder="{{ t("login.email.placeholder") }}"
+               required />
+        <small id="emailHelp" class="form-text text-muted">{{ t("login.email.help") }}</small>
+        {%if problems.email %}
+        <div class="invalid-feedback">
+          {% for problem in problems.email %}
+              <div>{{ t('login.email.problems.' + problem) }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="form-group" data-test="passwordField">
+        <label for="password">{{ t("login.password.label") }}</label>
+        <input type="password"
+               class="form-control {{ "is-invalid" if problems.password }}"
+               id="password"
+               name="password"
+               placeholder="{{ t("login.password.placeholder") }}"
+               required />
+        {%if problems.password %}
+        <div class="invalid-feedback">
+          {% for problem in problems.password %}
+             <div>{{ t('login.password.problems.' + problem) }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="form-group" data-test="password2Field">
+        <label for="password2">{{ t("login.password2.label") }}</label>
+        <input type="password"
+               class="form-control {{ "is-invalid" if problems.password2 }}"
+               id="password2"
+               name="password2"
+               placeholder="{{ t("login.password2.placeholder") }}"
+               required />
+        {%if problems.password2 %}
+        <div class="invalid-feedback">
+          {% for problem in problems.password2 %}
+              <div>{{ t('login.password2.problems.' + problem) }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <button type="submit" class="btn btn-primary">{{ t("login.buttons.register") }}</button>
+    </form>
+
+  </div>
 </div>
 {% endblock %}

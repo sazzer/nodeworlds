@@ -1,34 +1,35 @@
 {% extends "landing.nunjucks" %}
 
 {% block content %}
-<div class="ui card">
-    <div class="content">
-        <div class="header">{{ t("login.title.login") }}</div>
-    </div>
-    <div class="content">
-        <form action="/login" method="post" class="ui form" data-test="loginForm">
-            <input type="hidden" name="action" value="login" />
-            <div class="required field">
-                <label for="username">{{ t("login.username.label") }}</label>
-                <input type="text"
-                       id="username"
-                       name="username"
-                       placeholder="{{ t("login.username.placeholder") }}"
-                       value="{{ username }}"
-                       readonly
-                       required  />
-            </div>
-            <div class="required field">
-                <label for="password">{{ t("login.password.label") }}</label>
-                <input type="password"
-                       id="password"
-                       name="password"
-                       placeholder="{{ t("login.password.placeholder") }}"
-                       required
-                       autofocus />
-            </div>
-            <button class="ui fluid primary button" type="submit">{{ t("login.buttons.login") }}</button>
-        </form>
-    </div>
+<div class="card">
+  <div class="card-header">{{ t("login.title.start") }}</div>
+  <div class="card-body">
+
+    <form action="/login" method="post" data-test="loginForm">
+      <input type="hidden" name="action" value="login" />
+      <div class="form-group">
+        <label for="username">{{ t("login.username.label") }}</label>
+        <input type="text"
+               class="form-control"
+               id="username"
+               name="username"
+               value="{{ username }}"
+               placeholder="{{ t("login.username.placeholder") }}"
+               required
+               readonly />
+      </div>
+      <div class="form-group">
+        <label for="password">{{ t("login.password.label") }}</label>
+        <input type="password"
+               class="form-control {{ "is-invalid" if problems.password }}"
+               id="password"
+               name="password"
+               placeholder="{{ t("login.password.placeholder") }}"
+               required />
+      </div>
+      <button type="submit" class="btn btn-primary">{{ t("login.buttons.login") }}</button>
+    </form>
+
+  </div>
 </div>
 {% endblock %}

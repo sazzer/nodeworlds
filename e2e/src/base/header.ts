@@ -1,5 +1,5 @@
-import { By, WebElement } from 'selenium-webdriver';
-import { PageObject } from '../selenium';
+import { until, WebElement } from 'selenium-webdriver';
+import { PageObject, wait } from '../selenium';
 
 /**
  * Page object representing the header bar
@@ -24,6 +24,13 @@ export class Header extends PageObject {
      */
     public async login() {
         const loginLink = await this.findElement('[data-test="login"]');
+
+        if (await loginLink.isDisplayed() === false) {
+            const toggleHeader = await this.findElement('[data-toggle="collapse"]');
+            await toggleHeader.click();
+            await wait(until.elementIsVisible(loginLink));
+        }
+
         await loginLink.click();
     }
 

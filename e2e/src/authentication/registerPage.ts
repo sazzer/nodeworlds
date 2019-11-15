@@ -58,13 +58,15 @@ export class RegisterPage extends Page {
     /**
      * Get the list of errors on the form
      *
-     * @returns
+     * @param {string} field The name of the field
+     *
+     * @returns The list of errors for this field
      * @memberof RegisterPage
      */
-    public async getErrors() {
-        const errorFields = await this.findElements('.ui.error.message p');
+    public async getErrors(field: string) {
+        const errorFields = await this.findElements(`form[data-test="registerForm"] div.form-group[data-test="${field}"] .invalid-feedback div`);
 
-        const messages = errorFields.map(async field => await field.getText());
+        const messages = errorFields.map(async error => await error.getText());
         return Promise.all(messages);
     }
     /**

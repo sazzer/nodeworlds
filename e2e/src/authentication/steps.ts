@@ -48,10 +48,22 @@ Then('I am logging in as {string}', async (email: string) => {
 });
 
 Then('registration fails with errors:', async (errors: TableDefinition) => {
-    const expected = errors.raw().map(row => row[0]);
-
     const page = await createPage(registerPage);
 
-    const errorMessages = await page.getErrors();
-    expect(errorMessages).to.have.ordered.members(expected);
+    const fieldMapping: { [key: string]: string } = {
+        'Name': 'nameField',
+        'Email Address': 'emailField',
+        'Password': 'passwordField',
+        'Repeat Password': 'password2Field',
+    };
+
+    const expectedErrors = errors.hashes();
+
+    for (const fieldError of expectedErrors) {
+      const field = fieldError.Field;
+      const error = fieldError.Error;
+
+      const fieldErrors = await page.getErrors(fieldMapping[field]);
+      expect(fieldErrors).to.contain(error);
+    }
 });

@@ -1,12 +1,12 @@
 {% extends "layout/page.nunjucks" %}
 
 {% block body %}
-  <div class="ui stackable mobile reversed grid">
-    <div class="twelve wide column">
-      <img src="/landing" class="ui fluid rounded image" />
-    </div>
-    <div class="four wide column">
+  <div class="row">
+    <div class="col-12 col-md-4 order-sm-1">
       {% block content %}{% endblock %}
+    </div>
+    <div class="col-12 col-md-8">
+      <img src="/landing" class="img-fluid" />
     </div>
   </div>
 {% endblock %}

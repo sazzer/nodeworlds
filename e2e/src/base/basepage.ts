@@ -1,4 +1,4 @@
-import { By, WebDriver } from 'selenium-webdriver';
+import { WebDriver } from 'selenium-webdriver';
 import { Page } from '../selenium';
 import { Header } from './header';
 
@@ -11,25 +11,25 @@ import { Header } from './header';
  * @extends {Page}
  */
 export class BasePage extends Page {
-    /**
-     * Construct the page
-     * @param {WebDriver} driver The web driver
-     * @memberof Page
-     */
-    constructor(driver: WebDriver, url: string) {
-        super(driver, url);
-    }
+  /**
+   * Construct the page
+   * @param {WebDriver} driver The web driver
+   * @memberof Page
+   */
+  constructor(driver: WebDriver, url: string) {
+    super(driver, url);
+  }
 
-    /**
-     * Get the page header
-     *
-     * @readonly
-     * @memberof BasePage
-     */
-    public get header() {
-        return this.findElement('[data-test="header"]')
-            .then(element => new Header(element));
-    }
+  /**
+   * Get the page header
+   *
+   * @readonly
+   * @memberof BasePage
+   */
+  public get header() {
+    return this.findElement('[data-test="header"]')
+      .then(element => new Header(element));
+  }
 }
 
 /**
@@ -40,5 +40,5 @@ export class BasePage extends Page {
  * @returns the page model
  */
 export function basePage(driver: WebDriver) {
-    return new BasePage(driver, '');
+  return new BasePage(driver, '');
 }

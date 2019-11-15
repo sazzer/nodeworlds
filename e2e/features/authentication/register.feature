@@ -15,4 +15,5 @@ Feature: Login: Register new user
             | Password        | pa55w0rd             |
             | Repeat Password | password             |
         Then registration fails with errors:
-            | Passwords don't match |
+            | Field           | Error                 |
+            | Repeat Password | Passwords don't match |
