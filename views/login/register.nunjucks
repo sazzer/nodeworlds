@@ -1,5 +1,7 @@
 {% extends "landing.nunjucks" %}
 
+{% import "forms/field.nunjucks" as field %}
+
 {% block content %}
 <div class="card">
   <div class="card-header">{{ t("login.title.start") }}</div>
@@ -30,13 +32,7 @@
                required
                autofocus />
         <small id="nameHelp" class="form-text text-muted">{{ t("login.name.help") }}</small>
-        {%if problems.name %}
-        <div class="invalid-feedback">
-          {% for problem in problems.name %}
-              <div>{{ t('login.name.problems.' + problem) }}</div>
-          {% endfor %}
-        </div>
-        {% endif %}
+        {{ field.problem('login.name.problems.', problems.name, t) }}
       </div>
       <div class="form-group" data-test="emailField">
         <label for="email">{{ t("login.email.label") }}</label>
@@ -49,13 +45,7 @@
                placeholder="{{ t("login.email.placeholder") }}"
                required />
         <small id="emailHelp" class="form-text text-muted">{{ t("login.email.help") }}</small>
-        {%if problems.email %}
-        <div class="invalid-feedback">
-          {% for problem in problems.email %}
-              <div>{{ t('login.email.problems.' + problem) }}</div>
-          {% endfor %}
-        </div>
-        {% endif %}
+        {{ field.problem('login.email.problems.', problems.email, t) }}
       </div>
       <div class="form-group" data-test="passwordField">
         <label for="password">{{ t("login.password.label") }}</label>
@@ -65,13 +55,7 @@
                name="password"
                placeholder="{{ t("login.password.placeholder") }}"
                required />
-        {%if problems.password %}
-        <div class="invalid-feedback">
-          {% for problem in problems.password %}
-             <div>{{ t('login.password.problems.' + problem) }}</div>
-          {% endfor %}
-        </div>
-        {% endif %}
+        {{ field.problem('login.password.problems.', problems.password, t) }}
       </div>
       <div class="form-group" data-test="password2Field">
         <label for="password2">{{ t("login.password2.label") }}</label>
@@ -81,13 +65,7 @@
                name="password2"
                placeholder="{{ t("login.password2.placeholder") }}"
                required />
-        {%if problems.password2 %}
-        <div class="invalid-feedback">
-          {% for problem in problems.password2 %}
-              <div>{{ t('login.password2.problems.' + problem) }}</div>
-          {% endfor %}
-        </div>
-        {% endif %}
+        {{ field.problem('login.password2.problems.', problems.password2, t) }}
       </div>
       <button type="submit" class="btn btn-primary">{{ t("login.buttons.register") }}</button>
     </form>

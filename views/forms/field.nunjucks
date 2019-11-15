@@ -1,0 +1,11 @@
+{% macro problem(prefix, problems, t) %}
+
+  {%if problems %}
+    <div class="invalid-feedback">
+      {% for problem in problems %}
+          <div>{{ t(prefix + problem) }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+{% endmacro %}
